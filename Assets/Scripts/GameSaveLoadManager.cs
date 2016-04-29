@@ -9,7 +9,7 @@ public class GameSaveLoadManager{
 
     public static void Save()
     {
-        GameData.CurrentGameData = new GameData();
+        GameData.CurrentGameData = new GameData(GameObject.FindGameObjectWithTag("fire").GetComponent<Fire>().secondsLeft());
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + "/fireKeeperSave.save");
         bf.Serialize(fs, GameData.CurrentGameData);
@@ -27,7 +27,7 @@ public class GameSaveLoadManager{
         }
         else
         {
-            GameData.CurrentGameData = new GameData();
+            GameData.CurrentGameData = new GameData(300);
         }
     }
 }

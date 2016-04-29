@@ -20,11 +20,11 @@ public class TestGUI : MonoBehaviour {
         GUIStyle centeredStyle = new GUIStyle(GUI.skin.textArea);
         centeredStyle.alignment = TextAnchor.MiddleCenter;
 
-        GUI.TextArea(new Rect(10, 100, 160, 20), "Current Time: " + System.DateTime.Now.ToString("HH:mm:ss"), centeredStyle);
+        //GUI.TextArea(new Rect(10, 100, 160, 20), "Current Time: " + System.DateTime.Now.ToString("HH:mm:ss"), centeredStyle);
 
         if (GameData.CurrentGameData != null)
         {
-            GUI.TextArea(new Rect(10, 130, 160, 20), "Saved Time: " + GameData.CurrentGameData.saveTime.ToString("HH:mm:ss"), centeredStyle);
+            //GUI.TextArea(new Rect(10, 130, 160, 20), "Saved Time: " + GameData.CurrentGameData.saveTime.ToString("HH:mm:ss"), centeredStyle);
         }
     }
 }

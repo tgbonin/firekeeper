@@ -7,22 +7,36 @@ public class Fire : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		life = 7200;
+		life = 300;
+        InvokeRepeating("FireCountdown", 1.0f, 1.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		life--;
-		Debug.Log(life);
 		if (life <= 0) {
 			Debug.Log("The fire has died!");
 			Destroy(gameObject);
 		}
 	}
 
-	public void StokeFire(int woodAmount) {
-		life += woodAmount;
+    public void FireCountdown()
+    {
+        life--;
+    }
+
+	public void StokeFire(int addSeconds) {
+		life += addSeconds;
 	}
+
+    public int secondsLeft()
+    {
+        return life;
+    }
+
+    public void setSecondsLeft(int s)
+    {
+        life = s;
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
