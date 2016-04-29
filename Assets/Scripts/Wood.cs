@@ -7,9 +7,21 @@ public class Wood : MonoBehaviour {
 
 	[SerializeField]
 	int woodAmount;
+    public int WoodAmount
+    {
+        get
+        {
+            return woodAmount;
+        }
 
-	// Use this for initialization
-	void Start () {
+        set
+        {
+            woodAmount = value;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
 		fire = GameObject.Find("Fire");
 	}
 	
@@ -23,8 +35,8 @@ public class Wood : MonoBehaviour {
 		}
 		else {
 			Debug.Log("gone");
-			//If over fire, stoke fire
-			Destroy(gameObject);
+            gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+			//Destroy(gameObject);
 		}
 	}
 }

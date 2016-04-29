@@ -23,4 +23,11 @@ public class Fire : MonoBehaviour {
 	public void StokeFire(int woodAmount) {
 		life += woodAmount;
 	}
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log("colliding");
+        StokeFire(coll.gameObject.GetComponent<Wood>().WoodAmount);
+        Destroy(coll.gameObject);
+    }
 }

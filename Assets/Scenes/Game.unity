@@ -496,6 +496,7 @@ GameObject:
   - 4: {fileID: 1304447770}
   - 114: {fileID: 1304447771}
   - 60: {fileID: 1304447772}
+  - 50: {fileID: 1304447773}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -566,3 +567,20 @@ PolygonCollider2D:
       - {x: -3.247572, y: -0.13438654}
       - {x: -3.1152792, y: 0.4221568}
       - {x: -2.565785, y: 0.8401781}
+--- !u!50 &1304447773
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1304447769}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
