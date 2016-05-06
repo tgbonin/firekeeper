@@ -43,7 +43,7 @@ public class MobileInputMngr : MonoBehaviour {
 
             if(couldBeSwipe && swipeTime < maxSwipeTime && swipeDist > minSwipeDist)
             {
-
+				Debug.Log("could be");
                 if(Mathf.Sign(touch.position.x - swipeStartPos.x) == 1f){
 
                     //right
@@ -51,8 +51,18 @@ public class MobileInputMngr : MonoBehaviour {
                     {
                         HandleSwipe(ESwipeDirection.SCREEN_RIGHT);
                     }
-                    else HandleSwipe(ESwipeDirection.RIGHT);             
-
+					else {//HandleSwipe(ESwipeDirection.RIGHT);   
+						Debug.Log("casting");
+						RaycastHit2D hit = Physics2D.Raycast(swipeStartPos, touch.position - swipeStartPos, swipeDist);
+						if (hit.collider != null)
+						{
+							Debug.Log("hit");
+							if (hit.collider.gameObject.tag == "tree")
+							{
+								Debug.Log("chopped");
+							}
+						}
+					}
                 }
                 else
                 {
@@ -61,13 +71,29 @@ public class MobileInputMngr : MonoBehaviour {
                     {
                         HandleSwipe(ESwipeDirection.SCREEN_LEFT);
                     }
-                    else HandleSwipe(ESwipeDirection.LEFT);
+					else {//HandleSwipe(ESwipeDirection.LEFT);
+						Debug.Log("casting");
+						RaycastHit2D hit = Physics2D.Raycast(swipeStartPos, touch.position - swipeStartPos, swipeDist);
+						if (hit.collider != null)
+						{
+							Debug.Log("hit");
+							if (hit.collider.gameObject.tag == "tree")
+							{
+								Debug.Log("chopped");
+							}
+						}
+					}
                 }
 
             }
 
         }
     }
+
+	private void CheckSwipeCollision()
+	{
+		//Will fill with swipe hit detection once done
+	}
 
     private void HandleSwipe(ESwipeDirection direction)
     {
@@ -80,6 +106,13 @@ public class MobileInputMngr : MonoBehaviour {
             case ESwipeDirection.SCREEN_RIGHT:
                 cameraController.SnapLeft();
                 break;
+
+			case ESwipeDirection.LEFT:
+				cameraController.SnapRight();
+				break;
+			case ESwipeDirection.RIGHT:
+				cameraController.SnapRight();
+				break;
         }
     }
 }
