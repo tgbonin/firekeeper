@@ -18,16 +18,21 @@ public class GameSaveLoadManager{
 
     public static void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/fireKeeperSave.save"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = File.Open(Application.persistentDataPath + "/fireKeeperSave.save", FileMode.Open);
-            GameData.CurrentGameData = (GameData)bf.Deserialize(fs);
-            fs.Close();
-        }
-        else
-        {
-            GameData.CurrentGameData = new GameData(300);
-        }
+        Debug.Log(Application.persistentDataPath);
+
+        GameData.CurrentGameData = new GameData(300);
+
+
+        //if (File.Exists(Application.persistentDataPath + "/fireKeeperSave.save"))
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    FileStream fs = File.Open(Application.persistentDataPath + "/fireKeeperSave.save", FileMode.Open);
+        //    GameData.CurrentGameData = (GameData)bf.Deserialize(fs);
+        //    fs.Close();
+        //}
+        //else
+        //{
+        //    GameData.CurrentGameData = new GameData(300);
+        //}
     }
 }

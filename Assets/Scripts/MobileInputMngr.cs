@@ -9,7 +9,15 @@ public class MobileInputMngr : MonoBehaviour {
     public float maxSwipeTime;
     private bool couldBeSwipe;
 
-    CameraPanSnap cameraController = GameObject.Find("Main Camera").GetComponent<CameraPanSnap>();
+    private float swipeStartTime;
+
+    CameraPanSnap cameraController;
+
+    void Start()
+    {
+        swipeStartTime = 0;
+        cameraController = GameObject.Find("Main Camera").GetComponent<CameraPanSnap>();
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -19,7 +27,6 @@ public class MobileInputMngr : MonoBehaviour {
     private void checkHorizontalSwipes()
     {
         Vector2 swipeStartPos = Vector2.zero;
-        float swipeStartTime = 0;
 
         foreach(Touch touch in Input.touches)
         {
@@ -41,9 +48,17 @@ public class MobileInputMngr : MonoBehaviour {
             float swipeTime = Time.time - swipeStartTime;
             float swipeDist = Vector2.Distance(swipeStartPos, touch.position);
 
+            //Debug.Log(Time.time);
+            //Debug.Log(swipeStartTime);
+
+            if(touch.phase == TouchPhase.Ended)
+            {
+                
+            }
+
             if(couldBeSwipe && swipeTime < maxSwipeTime && swipeDist > minSwipeDist)
             {
-				Debug.Log("could be");
+				Debug.Log("could be swipe");
                 if(Mathf.Sign(touch.position.x - swipeStartPos.x) == 1f){
 
                     //right
@@ -97,6 +112,8 @@ public class MobileInputMngr : MonoBehaviour {
 
     private void HandleSwipe(ESwipeDirection direction)
     {
+        Debug.Log("Entered Handle Swipe");
+
         switch (direction)
         {
             case ESwipeDirection.SCREEN_LEFT:

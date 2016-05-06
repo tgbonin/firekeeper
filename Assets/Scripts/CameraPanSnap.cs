@@ -12,11 +12,12 @@ public class CameraPanSnap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform);
-        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform);
-        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform);
 
-        Debug.Log(snapPositions);
+        snapPositions = new List<Transform>();
+
+        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform.GetChild(0));
+        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform.GetChild(1));
+        snapPositions.Add(GameObject.FindGameObjectWithTag("cameraPositions").transform.GetChild(2));
 
         desiredSnapIndex = 1;
     }
