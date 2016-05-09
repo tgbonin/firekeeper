@@ -8,6 +8,7 @@ public class MobileInputMngr : MonoBehaviour {
     public float minSwipeDist;
     public float maxSwipeTime;
     private bool couldBeSwipe;
+    Vector2 swipeStartPos;
 
     private float swipeStartTime;
 
@@ -17,17 +18,27 @@ public class MobileInputMngr : MonoBehaviour {
     {
         swipeStartTime = 0;
         cameraController = GameObject.Find("Main Camera").GetComponent<CameraPanSnap>();
+        swipeStartPos = Vector2.zero;
     }
 
 	// Update is called once per frame
 	void Update () {
         checkHorizontalSwipes();
+
+        if (Input.GetKeyDown("left"))
+        {
+            HandleSwipe(ESwipeDirection.SCREEN_RIGHT);
+        }
+
+        if (Input.GetKeyDown("right"))
+        {
+            HandleSwipe(ESwipeDirection.SCREEN_LEFT);
+        }
+
 	}
 
     private void checkHorizontalSwipes()
     {
-        Vector2 swipeStartPos = Vector2.zero;
-
         foreach(Touch touch in Input.touches)
         {
 
@@ -35,12 +46,11 @@ public class MobileInputMngr : MonoBehaviour {
 
                 case TouchPhase.Began:
                     couldBeSwipe = true;
+
+                    //Debug.Log("Starting Swipe at: " + touch.position.x + "at time = " + Time.time);
+
                     swipeStartPos = touch.position;
                     swipeStartTime = Time.time;
-                    break;
-
-                case TouchPhase.Stationary:
-                    couldBeSwipe = false;
                     break;
 
             }
@@ -48,23 +58,24 @@ public class MobileInputMngr : MonoBehaviour {
             float swipeTime = Time.time - swipeStartTime;
             float swipeDist = Vector2.Distance(swipeStartPos, touch.position);
 
-            //Debug.Log(Time.time);
-            //Debug.Log(swipeStartTime);
-
             if(touch.phase == TouchPhase.Ended)
             {
-                
+                Debug.Log("Hit a swipe End. Info: " + swipeTime + " , " + swipeDist);
             }
 
-            if(couldBeSwipe && swipeTime < maxSwipeTime && swipeDist > minSwipeDist)
+            if(couldBeSwipe && (swipeTime < maxSwipeTime) && (swipeDist > minSwipeDist))
             {
-				Debug.Log("could be swipe");
+
+                Debug.Log("Shit should happen");
+
+				//Debug.Log("could be swipe");
                 if(Mathf.Sign(touch.position.x - swipeStartPos.x) == 1f){
 
                     //right
-                    if (swipeStartPos.x < (Screen.width * 0.1))
+                    if (swipeStartPos.x < (Screen.width * 0.15))
                     {
-                        HandleSwipe(ESwipeDirection.SCREEN_RIGHT);
+                        HandleSwipe(ESwipeDirection.SCREEN_LEFT);
+                        couldBeSwipe = false;
                     }
 					else {//HandleSwipe(ESwipeDirection.RIGHT);   
 						Debug.Log("casting");
@@ -82,9 +93,10 @@ public class MobileInputMngr : MonoBehaviour {
                 else
                 {
                     //left
-                    if (swipeStartPos.x > (Screen.width - Screen.width * 0.1))
+                    if (swipeStartPos.x > (Screen.width - Screen.width * 0.15))
                     {
-                        HandleSwipe(ESwipeDirection.SCREEN_LEFT);
+                        HandleSwipe(ESwipeDirection.SCREEN_RIGHT);
+                        couldBeSwipe = false;
                     }
 					else {//HandleSwipe(ESwipeDirection.LEFT);
 						Debug.Log("casting");
@@ -112,23 +124,23 @@ public class MobileInputMngr : MonoBehaviour {
 
     private void HandleSwipe(ESwipeDirection direction)
     {
-        Debug.Log("Entered Handle Swipe");
+        //Debug.Log("Entered Handle Swipe");
 
         switch (direction)
         {
             case ESwipeDirection.SCREEN_LEFT:
-                cameraController.SnapRight();
-                break;
-
-            case ESwipeDirection.SCREEN_RIGHT:
                 cameraController.SnapLeft();
                 break;
 
+            case ESwipeDirection.SCREEN_RIGHT:
+                cameraController.SnapRight();
+                break;
+
 			case ESwipeDirection.LEFT:
-				cameraController.SnapRight();
+				
 				break;
 			case ESwipeDirection.RIGHT:
-				cameraController.SnapRight();
+				
 				break;
         }
     }

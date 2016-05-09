@@ -28,13 +28,13 @@ public class Wood : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButton(0)) {
-			Debug.Log("down");
+			//Debug.Log("down");
 			Vector3 tempVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			tempVec.z = 0;
 			gameObject.transform.position = tempVec;
 		}
 		else {
-			Debug.Log("gone");
+			//Debug.Log("gone");
             gameObject.GetComponent<PolygonCollider2D>().enabled = true;
 			//Destroy(gameObject);
 		}
