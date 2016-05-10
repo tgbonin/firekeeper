@@ -4,10 +4,12 @@ using System.Collections;
 public class Fire : MonoBehaviour {
 
 	int life;
+	GameObject woodPile;
 
 	// Use this for initialization
 	void Start () {
 		life = 300;
+		woodPile = GameObject.Find("Wood Pile");
         InvokeRepeating("FireCountdown", 1.0f, 1.0f);
 	}
 	
@@ -24,8 +26,8 @@ public class Fire : MonoBehaviour {
         life--;
     }
 
-	public void StokeFire(int addSeconds) {
-		life += addSeconds;
+	public void StokeFire(int stokeAmmount) {
+		life += stokeAmmount;
 	}
 
     public int secondsLeft()
@@ -36,12 +38,5 @@ public class Fire : MonoBehaviour {
     public void setSecondsLeft(int s)
     {
         life = s;
-    }
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        //Debug.Log("colliding");
-        //StokeFire(coll.gameObject.GetComponent<Wood>().WoodAmount);
-        //Destroy(coll.gameObject);
     }
 }

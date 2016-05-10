@@ -23,7 +23,7 @@ public class Wood : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		fire = GameObject.Find("Fire");
+        fire = GameObject.Find("Fire");
 	}
 	
 	// Update is called once per frame
