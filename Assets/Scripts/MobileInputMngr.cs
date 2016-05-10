@@ -46,9 +46,6 @@ public class MobileInputMngr : MonoBehaviour {
 
                 case TouchPhase.Began:
                     couldBeSwipe = true;
-
-                    //Debug.Log("Starting Swipe at: " + touch.position.x + "at time = " + Time.time);
-
                     swipeStartPos = touch.position;
                     swipeStartTime = Time.time;
                     break;
@@ -58,17 +55,9 @@ public class MobileInputMngr : MonoBehaviour {
             float swipeTime = Time.time - swipeStartTime;
             float swipeDist = Vector2.Distance(swipeStartPos, touch.position);
 
-            if(touch.phase == TouchPhase.Ended)
-            {
-                Debug.Log("Hit a swipe End. Info: " + swipeTime + " , " + swipeDist);
-            }
-
             if(couldBeSwipe && (swipeTime < maxSwipeTime) && (swipeDist > minSwipeDist))
             {
 
-                Debug.Log("Shit should happen");
-
-				//Debug.Log("could be swipe");
                 if(Mathf.Sign(touch.position.x - swipeStartPos.x) == 1f){
 
                     //right
@@ -124,7 +113,6 @@ public class MobileInputMngr : MonoBehaviour {
 
     private void HandleSwipe(ESwipeDirection direction)
     {
-        //Debug.Log("Entered Handle Swipe");
 
         switch (direction)
         {
