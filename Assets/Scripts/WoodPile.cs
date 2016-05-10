@@ -10,11 +10,19 @@ public class WoodPile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		life = 7200;
+		life = 200;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	}
+
+	public void UseWood(int woodLoss) {
+		life -= woodLoss;
+	}
+
+	public void AddWood(int woodLoss) {
+		life += woodLoss;
 	}
 
 	void OnMouseDown() {

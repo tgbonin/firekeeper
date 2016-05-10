@@ -85,7 +85,7 @@ public class MobileInputMngr : MonoBehaviour {
 							Debug.Log("hit");
 							if (hit.collider.gameObject.tag == "tree")
 							{
-								Debug.Log("chopped");
+								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddWood(1);
 							}
 						}
 					}
@@ -106,7 +106,7 @@ public class MobileInputMngr : MonoBehaviour {
 							Debug.Log("hit");
 							if (hit.collider.gameObject.tag == "tree")
 							{
-								Debug.Log("chopped");
+								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddWood(1);
 							}
 						}
 					}
