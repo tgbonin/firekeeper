@@ -8,15 +8,11 @@ public class Wood : MonoBehaviour {
 
 	[SerializeField]
 	int woodAmount;
-    public int WoodAmount
-    {
-        get
-        {
+    public int WoodAmount {
+        get {
             return woodAmount;
         }
-
-        set
-        {
+        set {
             woodAmount = value;
         }
     }
