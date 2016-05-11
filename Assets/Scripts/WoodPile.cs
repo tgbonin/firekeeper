@@ -44,11 +44,13 @@ public class WoodPile : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		Vector3 tempVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		tempVec.z = 0;
-		Instantiate(logPrefab, tempVec, Quaternion.identity);
+        if (woodAmount > 0) {
+            Vector3 tempVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            tempVec.z = 0;
+            Instantiate(logPrefab, tempVec, Quaternion.identity);
 
-        woodAmount--;
+            woodAmount--;
+        }
 	}
 
     public void SetWoodPileSize(int newSize)
