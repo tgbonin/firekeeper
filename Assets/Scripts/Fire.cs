@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Fire : MonoBehaviour {
 
 	int life;
 	GameObject woodPile;
+
+    TimeSpan fireTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +22,17 @@ public class Fire : MonoBehaviour {
 			Debug.Log("The fire has died!");
 			Destroy(gameObject);
 		}
-	}
+
+        fireTimer = TimeSpan.FromSeconds(life);
+        string fireTime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                                        fireTimer.Hours,
+                                        fireTimer.Minutes,
+                                        fireTimer.Seconds
+                                        );
+
+        gameObject.GetComponentInChildren<TextMesh>().text = fireTime;
+
+    }
 
     public void FireCountdown()
     {
