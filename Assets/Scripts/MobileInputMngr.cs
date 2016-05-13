@@ -68,13 +68,14 @@ public class MobileInputMngr : MonoBehaviour {
                     }
 					else {//HandleSwipe(ESwipeDirection.RIGHT);   
 						Debug.Log("casting");
+						Debug.DrawLine(swipeStartPos, touch.position - swipeStartPos);
 						RaycastHit2D hit = Physics2D.Raycast(swipeStartPos, touch.position - swipeStartPos, swipeDist);
 						if (hit.collider != null)
 						{
 							Debug.Log("hit");
 							if (hit.collider.gameObject.tag == "tree")
 							{
-								//GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddWood(1);
+								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
 							}
 						}
 					}
@@ -95,7 +96,7 @@ public class MobileInputMngr : MonoBehaviour {
 							Debug.Log("hit");
 							if (hit.collider.gameObject.tag == "tree")
 							{
-								//GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddWood(1);
+								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
 							}
 						}
 					}
