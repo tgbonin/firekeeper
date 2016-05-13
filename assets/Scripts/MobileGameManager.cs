@@ -31,18 +31,6 @@ public class MobileGameManager : MonoBehaviour {
 
     void OnGUI()
     {
-        //GUIStyle centeredStyle = new GUIStyle(GUI.skin.textArea);
-        //centeredStyle.alignment = TextAnchor.MiddleCenter;
-        //centeredStyle.fontSize = 35;
-        //
-        //fireTimer = TimeSpan.FromSeconds(fireTimeLeft);
-        //string fireTime = string.Format("{0:D2}:{1:D2}:{2:D2}",
-        //                                fireTimer.Hours,
-        //                                fireTimer.Minutes,
-        //                                fireTimer.Seconds                                        
-        //                                );
-        //
-        //GUI.TextArea(new Rect((Screen.width / 2) - 175, 30, 350, 60), "Time Left: " + fireTime, centeredStyle);
     }
 
 
