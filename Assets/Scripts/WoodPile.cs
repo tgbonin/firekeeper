@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WoodPile : MonoBehaviour {
 
@@ -40,6 +41,8 @@ public class WoodPile : MonoBehaviour {
         {
             spriteRenderer.sprite = new Sprite();
         }
+
+        GameObject.Find("LogAmtText").GetComponent<Text>().text = "X " + woodAmount;
 
 	}
 

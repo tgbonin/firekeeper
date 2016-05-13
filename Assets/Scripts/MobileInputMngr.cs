@@ -66,13 +66,14 @@ public class MobileInputMngr : MonoBehaviour {
                         HandleSwipe(ESwipeDirection.SCREEN_LEFT);
                         couldBeSwipe = false;
                     }
-					else {//HandleSwipe(ESwipeDirection.RIGHT);   
-						Debug.Log("casting");
-						Debug.DrawLine(swipeStartPos, touch.position - swipeStartPos);
-						RaycastHit2D hit = Physics2D.Raycast(swipeStartPos, touch.position - swipeStartPos, swipeDist);
+					else {//HandleSwipe(ESwipeDirection.RIGHT);
+                        Vector2 startPosWorld = Camera.main.ScreenToWorldPoint(swipeStartPos);
+                        Vector2 endPosWorld = Camera.main.ScreenToWorldPoint(touch.position);
+                        
+                        RaycastHit2D hit = Physics2D.Raycast(startPosWorld, endPosWorld - startPosWorld, Vector2.Distance(startPosWorld, endPosWorld));
 						if (hit.collider != null)
 						{
-							Debug.Log("hit");
+							couldBeSwipe = false;
 							if (hit.collider.gameObject.tag == "tree")
 							{
 								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
@@ -89,15 +90,17 @@ public class MobileInputMngr : MonoBehaviour {
                         couldBeSwipe = false;
                     }
 					else {//HandleSwipe(ESwipeDirection.LEFT);
-						Debug.Log("casting");
-						RaycastHit2D hit = Physics2D.Raycast(swipeStartPos, touch.position - swipeStartPos, swipeDist);
-						if (hit.collider != null)
+                        Vector2 startPosWorld = Camera.main.ScreenToWorldPoint(swipeStartPos);
+                        Vector2 endPosWorld = Camera.main.ScreenToWorldPoint(touch.position);
+
+                        RaycastHit2D hit = Physics2D.Raycast(startPosWorld, endPosWorld - startPosWorld, Vector2.Distance(startPosWorld, endPosWorld));
+                        if (hit.collider != null)
 						{
-							Debug.Log("hit");
-							if (hit.collider.gameObject.tag == "tree")
+                            couldBeSwipe = false;
+                            if (hit.collider.gameObject.tag == "tree")
 							{
-								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
-							}
+                                GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
+                            }
 						}
 					}
                 }
