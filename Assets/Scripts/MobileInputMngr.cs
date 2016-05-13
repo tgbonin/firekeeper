@@ -66,7 +66,7 @@ public class MobileInputMngr : MonoBehaviour {
                         HandleSwipe(ESwipeDirection.SCREEN_LEFT);
                         couldBeSwipe = false;
                     }
-					else {//HandleSwipe(ESwipeDirection.RIGHT);   
+					else {//HandleSwipe(ESwipeDirection.RIGHT);
                         Vector2 startPosWorld = Camera.main.ScreenToWorldPoint(swipeStartPos);
                         Vector2 endPosWorld = Camera.main.ScreenToWorldPoint(touch.position);
                         
@@ -77,7 +77,6 @@ public class MobileInputMngr : MonoBehaviour {
 							if (hit.collider.gameObject.tag == "tree")
 							{
 								GameObject.Find("Wood Pile").GetComponent<WoodPile>().AddToWoodPileSize(1);
-
 							}
 						}
 					}
