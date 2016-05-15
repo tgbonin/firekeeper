@@ -61,7 +61,7 @@ public class MobileInputMngr : MonoBehaviour {
                 if(Mathf.Sign(touch.position.x - swipeStartPos.x) == 1f){
 
                     //right
-                    if (swipeStartPos.x < (Screen.width * 0.15))
+                    if (swipeStartPos.y < (Screen.height * .08))
                     {
                         HandleSwipe(ESwipeDirection.SCREEN_LEFT);
                         couldBeSwipe = false;
@@ -84,7 +84,7 @@ public class MobileInputMngr : MonoBehaviour {
                 else
                 {
                     //left
-                    if (swipeStartPos.x > (Screen.width - Screen.width * 0.15))
+                    if (swipeStartPos.y < (Screen.height * .08))
                     {
                         HandleSwipe(ESwipeDirection.SCREEN_RIGHT);
                         couldBeSwipe = false;
