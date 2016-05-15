@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class MobileGameManager : MonoBehaviour {
 
@@ -8,9 +9,20 @@ public class MobileGameManager : MonoBehaviour {
     TimeSpan fireTimer;
     GameObject fire;
 
+	float hydration;
+	Scrollbar hydrationBar;
+	Text hydrationTimer;
+	Button hydrateButton;
+
 	// Use this for initialization
 	void Start () {
         fire = GameObject.FindGameObjectWithTag("fire");
+
+		hydration = 1800.0f;
+		hydrationBar = GameObject.Find("HydrationBar").GetComponent<Scrollbar>();
+		hydrationTimer = GameObject.Find("HydrationTimer").GetComponent<Text>();
+		hydrateButton = GameObject.Find("SecondCanvas").GetComponentInChildren<Button>();
+		hydrateButton.onClick.AddListener(delegate { Hydrate(); });
 
         GameSaveLoadManager.Load();
         int secondsPassed = FindSecondsSinceLastSession();
@@ -27,6 +39,13 @@ public class MobileGameManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         fireTimeLeft = fire.GetComponent<Fire>().secondsLeft();
+
+		hydration -= Time.deltaTime;
+		hydrationBar.size = hydration / 1800.0f;
+
+		string minSec = String.Format("{0}:{1:00}", (int)hydration/60, (int)hydration % 60);
+		//Debug.Log(hydrateButton.onClick);
+		hydrationTimer.text = minSec;
 	}
 
     void OnGUI()
@@ -53,4 +72,8 @@ public class MobileGameManager : MonoBehaviour {
         }
     }
 
+	public void Hydrate() {
+		hydration = 1800.0f;
+		Debug.Log("Hydrated");
+	}
 }

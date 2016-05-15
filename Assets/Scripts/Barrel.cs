@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Barrel : MonoBehaviour {
 
 	float waterAmount;
+	Button hydrateButton;
 
 	[SerializeField]
 	GameObject emptyBarrel, fullBarrel;
@@ -12,8 +13,11 @@ public class Barrel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		waterAmount = 0;
+
+		hydrateButton = GameObject.Find("SecondCanvas").GetComponentInChildren<Button>();
+		hydrateButton.onClick.AddListener(delegate { AddWater(-0.5f); });
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (waterAmount > 2.0f) {
@@ -29,12 +33,16 @@ public class Barrel : MonoBehaviour {
 	}
 
 	public void AddWater(float addAmount) {
+		if (waterAmount == 0.0f && addAmount > 0.0f) {
+			hydrateButton.interactable = true;
+		}
 		waterAmount += addAmount;
 		if (waterAmount > 10.0f) {
 			waterAmount = 10.0f;
 		}
-		else if (waterAmount < 0.0f) {
+		else if (waterAmount <= 0.0f) {
 			waterAmount = 0.0f;
+			hydrateButton.interactable = false;
 		}
 	}
 }
