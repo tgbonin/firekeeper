@@ -33,10 +33,14 @@ public class Barrel : MonoBehaviour {
 	}
 
 	public void AddWater(float addAmount) {
-		if (waterAmount == 0.0f && addAmount > 0.0f) {
-			hydrateButton.interactable = true;
-		}
+
 		waterAmount += addAmount;
+
+        if(waterAmount > 0)
+        {
+            hydrateButton.interactable = true;
+        }
+
 		if (waterAmount > 10.0f) {
 			waterAmount = 10.0f;
 		}
@@ -45,4 +49,14 @@ public class Barrel : MonoBehaviour {
 			hydrateButton.interactable = false;
 		}
 	}
+
+    public float getAmtWaterLeft()
+    {
+        return waterAmount;
+    }
+
+    public void SetWaterAmt(float w)
+    {
+        waterAmount = w;
+    }
 }

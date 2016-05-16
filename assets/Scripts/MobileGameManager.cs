@@ -26,8 +26,27 @@ public class MobileGameManager : MonoBehaviour {
 
         GameSaveLoadManager.Load();
         int secondsPassed = FindSecondsSinceLastSession();
-        fire.GetComponent<Fire>().setSecondsLeft(GameData.CurrentGameData.fireSecondsLeft - secondsPassed);
-	}
+
+        int secondsLeft = GameData.CurrentGameData.fireSecondsLeft - secondsPassed;
+
+        if (secondsLeft < 0)
+        {
+            GameData.CurrentGameData = new GameData(300, 5, 3.0f);
+            secondsLeft = 300;
+        }
+
+        Debug.Log(secondsLeft);
+
+        fire.GetComponent<Fire>().setSecondsLeft(secondsLeft);
+        GameObject.Find("Wood Pile").GetComponent<WoodPile>().SetWoodPileSize(GameData.CurrentGameData.numWood);
+        GameObject.Find("Barrel").GetComponent<Barrel>().SetWaterAmt(GameData.CurrentGameData.amtWater);
+
+        if(GameData.CurrentGameData.amtWater == 0)
+        {
+            GameObject.Find("HydrateButton").GetComponent<Button>().interactable = false;
+        }
+
+    }
 
     private int FindSecondsSinceLastSession()
     {
@@ -44,7 +63,7 @@ public class MobileGameManager : MonoBehaviour {
 		hydrationBar.size = hydration / 1800.0f;
 
 		string minSec = String.Format("{0}:{1:00}", (int)hydration/60, (int)hydration % 60);
-		//Debug.Log(hydrateButton.onClick);
+
 		hydrationTimer.text = minSec;
 	}
 

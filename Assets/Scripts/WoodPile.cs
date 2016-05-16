@@ -73,4 +73,9 @@ public class WoodPile : MonoBehaviour {
             woodAmount = 0;
         }
     }
+
+    public int GetAmtWoodLeft()
+    {
+        return woodAmount;
+    }
 }
